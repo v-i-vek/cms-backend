@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "44aabd25-4fe3-4c4a-bddb-b0b7460e51b0",
+		"name": "Material",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26161865"
+	},
+	"item": [
+		{
+			"name": "Read/singleread",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Material_name",
+							"value": "pipes",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "Material_quantity",
+							"value": "500",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/material/6422b151516b5e0d03dfc2b8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"material",
+						"6422b151516b5e0d03dfc2b8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Material_name\":\"brick\",\n    \"Material_quantity\":45,\n    \"Quantity_id\":10,\n    \"Matrial_cost\":5000,\n    \"Material_img\": \"Material_img\",\n    \"Matrial_status\":true\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/material",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"material"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \n    \"Material_name\": \"cement\"\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/material/64227dbf6788f92808716c7b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"material",
+						"64227dbf6788f92808716c7b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/material/64227dbf6788f92808716c7b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"material",
+						"64227dbf6788f92808716c7b"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
