@@ -6,10 +6,14 @@ const routequantity = require("./route/QuantityRoute");
 const route = require("./routes/DocumentRoute");
 const docs = require("./models/DocumentModel");
 const document_master = require("./models/DocumentModel");
+const userroute = require("./routes/user");
+const roleRoute = require("./routes/role");
 const port = process.env.PORT || 9000;
 app.use(express.json());
 const DB_URL = "mongodb://localhost:27017";
 connectDb(DB_URL);
+app.use(userroute);
+app.use(roleRoute)
 app.use("/uploads", express.static("uploads"));
 app.use(route);
 app.use(routequantity);
