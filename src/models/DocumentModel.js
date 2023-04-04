@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-// const validator = require('validator');
-
 const document_masterSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -11,12 +9,6 @@ const document_masterSchema = new mongoose.Schema({
   user_id: {
     type: Number,
     requird: true,
-    // unique:[true, "user_id already present"],
-    // validate(value){
-    // if(!validator.isuserid(value)){
-    //        throw new Error("invalid")
-    //     }
-    // }
   },
 
   type: {
@@ -35,8 +27,5 @@ const document_masterSchema = new mongoose.Schema({
   },
 });
 
-const document_master = new mongoose.model(
-  "document_master",
-  document_masterSchema
-);
+const document_master = new mongoose.model("document_master",document_masterSchema);
 module.exports = document_master;
