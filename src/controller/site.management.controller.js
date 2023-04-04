@@ -1,5 +1,5 @@
-const site_mangement_Model = require('../model/site.management')
-const multer = require('multer')
+const site_mangement_Model = require('../models/site.management')
+
 
 
 
@@ -13,16 +13,17 @@ const site_get = async (req, res) => {
     console.log("site api is called")
 }
 
+// getting all the data
+const site_allGet = async (req, res) => {
+    try {
+        const result = await site_mangement_Model.find()
+        return res.status(201).send(result)
+        console.log("site api is called")
+    } catch (error) {
+        return res.status(401).send(error)
+    }
 
-
-
-
-
-
-
-
-
-
+}
 
 // this is for update  the site using the address id
 const site_patch = async (req, res) => {
@@ -49,12 +50,6 @@ const site_patch = async (req, res) => {
 
 }
 
-
-
-
-
-
-
 // this method is to delete the data from the db
 const site_delete = async (req, res) => {
     try {
@@ -67,10 +62,6 @@ const site_delete = async (req, res) => {
     }
 }
 
-
-
-
-
 // this is for posting the data in db through post method
 const site_post = async (req, res) => {
 
@@ -82,16 +73,13 @@ const site_post = async (req, res) => {
 
     try {
         const site_manage = new site_mangement_Model({
-
-           
             name: req.body.name,
             // site_id: req.body.id,
+            category:req.body.category,
             location: req.body.location,
-
         })
-        console.log("before saving")
         console.log(req.file)
-        if(req.file){
+        if (req.file) {
             console.log("coming here")
             site_manage.brand_logo = req.file.path// this is for checking the valid name and giving the path
         }
@@ -109,4 +97,4 @@ const site_post = async (req, res) => {
 
 
 
-module.exports = { site_post, site_get, site_patch, site_delete, }
+module.exports = { site_post, site_get, site_patch, site_delete, site_allGet }

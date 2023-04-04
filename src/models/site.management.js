@@ -24,6 +24,11 @@ const site_mangement_schema = mongoose.Schema({
         type:String,
         require:true
     },
+    category:{
+        type:String,
+        require:true
+
+    },
      brand_logo:{ 
         type:String
     }

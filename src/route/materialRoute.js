@@ -6,7 +6,7 @@ const {
   materialUpdate,
   materialDelete
 } = require("../controller/materialController");
-const upload = require("../middleware/upload");
+const upload = require("../middleware/material_upload");
 const route = express.Router();
 route.get("/getmaterial", materialGet);
 route.get("/getmaterial/:id", materialGetSingle);

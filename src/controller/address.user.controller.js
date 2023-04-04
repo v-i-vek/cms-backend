@@ -1,25 +1,33 @@
-const Address_model = require('../model/Address.user.model')
 
-// controller of the get
+const {Address_model} = require('../models/Address.user.model')
+
+
 
 
 
 // this mehtod is for call in get the method
 const addressGet = async(req,res)=>{
+   try {
     const result = await Address_model.findById(req.params.id)
-    res.send(result)
+    res.status(201).send(result)
+    
+   } catch (error) {
+    res.status(401).send(error.message)
+   }
 }
 
+// to get all data
 const addressGetAll = async(req,res)=>{
-    const result = await Address_model.find()
+    try {
+        const result = await Address_model.find()
 
-    res.send(result)
+        res.status(201).send(result)
+        
+    } catch (error) {
+        res.status(401).send(error.message)
+    }
+   
 }
-
-
-
-
-
 
 // this is for posting the data in db through post method
 
@@ -63,7 +71,7 @@ const addressPost = async(req,res)=>{
             res.status(201).send('successful')
             
         } catch (error) {
-           console.log(error) 
+            res.status(401).send(error.message)
         }
        
     }
