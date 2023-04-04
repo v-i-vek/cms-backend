@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+//database connection code
 const connectDb =async(DB_URL)=>{
     const DB_OPT={
         dbName :"constructiondb"
@@ -10,5 +10,4 @@ const connectDb =async(DB_URL)=>{
         console.log("Error connecting:",err.message);
     });
 }
-
-module.exports = connectDb
+module.exports = connectDb;
