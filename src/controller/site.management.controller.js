@@ -34,7 +34,7 @@ const siteDelete = async (req, res) => {
   try {
     const id = req.params.id;
     const deleteAddress = await siteMangementModel.findByIdAndDelete({ _id: id,});
-    res.status(201).send(deleteAddress));
+    res.status(201).send(deleteAddress);
   } catch (error) {
    res.status(401).send(error.message)
   }
