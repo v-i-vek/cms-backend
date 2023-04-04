@@ -1,8 +1,8 @@
-const { Address_model } = require("../models/Address.user.model");
+const { addressModel  } = require("../models/address.user.model");
 // this mehtod is for call in get the method
 const addressGet = async (req, res) => {
     try {
-        const result = await Address_model.findById(req.params.id);
+        const result = await addressModel .findById(req.params.id);
         res.status(201).send(result);
     } catch (error) {
         res.status(401).send(error.message);
@@ -11,7 +11,7 @@ const addressGet = async (req, res) => {
 // to get all data
 const addressGetAll = async (req, res) => {
     try {
-        const result = await Address_model.find();
+        const result = await addressModel .find();
         res.status(201).send(result);
     } catch (error) {
         res.status(401).send(error.message);
@@ -20,7 +20,7 @@ const addressGetAll = async (req, res) => {
 // this is for posting the data in db through post method
 const addressPost = async (req, res) => {
     try {
-        const addAddress = new Address_model({
+        const addAddress = new addressModel ({
             Address: req.body.address,
             country: req.body.country,
             city: req.body.city,
@@ -28,12 +28,9 @@ const addressPost = async (req, res) => {
             pin_code: req.body.pin_code,
         });
         const saved = await addAddress.save();
-        console.log(saved);
-
         return res.status(201).json({ message: "added succesfully" });
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: error });
+        return res.status(401).json({ message: error });
     }
 };
 
@@ -41,15 +38,14 @@ const addressPost = async (req, res) => {
 const addressPatch = async (req, res) => {
     try {
         const id = req.params.id;
-        const result = await Address_model.findById({ _id: id });
+        const result = await addressModel .findById({ _id: id });
         const update = await result.updateOne({
-            Address: req.body.Address,
+            address: req.body.address,
             country: req.body.country,
             city: req.body.city,
             state: req.body.state,
             pin_code: req.body.pin_code,
         });
-        console.log(update);
         res.status(201).send("successful");
     } catch (error) {
         res.status(401).send(error.message);
@@ -60,11 +56,10 @@ const addressPatch = async (req, res) => {
 const addressDelete = async (req, res) => {
     try {
         const id = req.params.id;
-        const DeleteAddress = await Address_model.findByIdAndDelete({ _id: id });
-        console.log(DeleteAddress);
-        res.send("Deleted");
+        const DeleteAddress = await addressModel .findByIdAndDelete({ _id: id });
+        res.status(201).send(DeleteAddress);
     } catch (error) {
-        console.log(error);
+        res.status(401).send(error.message)
     }
 };
 

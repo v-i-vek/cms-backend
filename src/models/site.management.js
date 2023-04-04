@@ -1,14 +1,10 @@
 const mongoose = require("mongoose");
-// Brand_logo,
-// Name,
-// Site_id,
-// location
-const site_mangement_schema = mongoose.Schema({
+
+const siteManageSchema = mongoose.Schema({
   name: {
     type: String,
     require: true,
   },
-
   location: {
     type: String,
     require: true,
@@ -17,14 +13,11 @@ const site_mangement_schema = mongoose.Schema({
     type: String,
     require: true,
   },
-  brand_logo: {
+  brandLogo: {
     type: String,
   },
 });
 
-const site_mangement_Model = mongoose.model(
-  "site_mangement",
-  site_mangement_schema
-);
+const siteMangementModel = mongoose.model("siteMangement",siteManageSchema);
 
-module.exports = site_mangement_Model;
+module.exports = {siteMangementModel}
