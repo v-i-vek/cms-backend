@@ -1,7 +1,7 @@
 const MaterialModel = require("../models/materialModel");
 //get all materials
 const materialGet = async (req, res) => {
-  try {
+  try {models
     const materialGetData = await MaterialModel.find();
     res.status(201).send(materialGetData);
   } catch (error) {
@@ -34,7 +34,7 @@ const materialUpdate = async (req, res) => {
     res.status(401).send(error.message);
   }
 };
-//delete materials
+//delete materials the materials
 const materialDelete = async (req, res) => {
   try {
     const _Id = req.params.id;
