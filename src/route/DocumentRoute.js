@@ -1,0 +1,13 @@
+const express = require("express");
+const router = express.Router();
+const { docsGet } = require("../controller/DocumentController");
+const { docsPost } = require("../controller/DocumentController");
+const { docsDelete } = require("../controller/DocumentController");
+const { docsPatch } = require("../controller/DocumentController");
+const upload = require("../middleware/upload");
+const document_master = require("../models/DocumentModel");
+router.get("/docs", docsGet);
+router.post("/docs", upload.single("image"), docsPost);
+router.delete("/docs/:id", docsDelete);
+router.patch("/docs/:id", docsPatch);
+module.exports = router;
