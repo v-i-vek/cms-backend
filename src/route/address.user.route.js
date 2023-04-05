@@ -11,5 +11,5 @@ addressRoute.post('/postAddress/',addressPost)
 addressRoute.patch('/updateAddress/:id',addressPatch)
 addressRoute.delete('/deleteAddress/:id',addressDelete)
 
-module.exports =  {addressRoute}
+module.exports =  addressRoute
 
