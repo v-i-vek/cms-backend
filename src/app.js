@@ -1,22 +1,32 @@
 const express = require("express");
 const app = express();
 const connectDb = require("./db/conn");
+const siteRoute = require('./route/siteManegement.route')
 const route = require("./route/materialRoute");
 const routequantity = require("./route/QuantityRoute");
+<<<<<<< HEAD
+const addressRoute = require('./route/address.user.route')
+const port = process.env.PORT || 9050;
+=======
 const docs = require("./models/DocumentModel");
 const routePermission = require('./route/permission.route')
 const document_master = require("./models/DocumentModel");
 const ServiceRoute = require("./route/ServiceRoute")
-const userroute = require("./routes/user");
-const roleRoute = require("./routes/role");
-const port = process.env.PORT || 9000;
+const userroute = require("./route/user");
+const roleRoute = require("./route/role");
+const siteRoute = require('./route/siteManegement.route')
+const addressRoute = require('./route/address.user.route')
+const port = process.env.PORT || 9100;
+>>>>>>> master
 app.use(express.json());
-const DB_URL = "mongodb://localhost:27017";
+const DB_URL = "mongodb+srv://root:root@cluster0.63corsg.mongodb.net/test";
 connectDb(DB_URL);
 app.use(userroute);
 app.use(roleRoute)
 app.use("/uploads", express.static("uploads"));
 app.use(route);
+app.use(siteRoute)
+app.use(addressRoute)
 app.use(routequantity);
 app.use(routePermission);
 app.use(ServiceRoute);
