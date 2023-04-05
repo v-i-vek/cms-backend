@@ -6,6 +6,7 @@ const routequantity = require("./route/QuantityRoute");
 const docs = require("./models/DocumentModel");
 const routePermission = require('./route/permission.route')
 const document_master = require("./models/DocumentModel");
+const ServiceRoute = require("./route/ServiceRoute")
 const userroute = require("./routes/user");
 const roleRoute = require("./routes/role");
 const port = process.env.PORT || 9000;
@@ -18,6 +19,7 @@ app.use("/uploads", express.static("uploads"));
 app.use(route);
 app.use(routequantity);
 app.use(routePermission);
+app.use(ServiceRoute);
 app.listen(port, () => {
   console.log(`connnecte ${port}`);
 });
