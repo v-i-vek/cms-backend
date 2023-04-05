@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const connectDb = require("./db/conn");
-const {siteRoute} = require('./route/siteManegement.route')
+const siteRoute = require('./route/siteManegement.route')
 const route = require("./route/materialRoute");
 const routequantity = require("./route/QuantityRoute");
 <<<<<<< HEAD
