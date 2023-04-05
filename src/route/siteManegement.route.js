@@ -12,9 +12,8 @@ siteRoute.patch('/updateSite/:id',sitePatch)
 siteRoute.delete('/deleteSite/:id',siteDelete)
 
 
-<<<<<<< HEAD
+
 module.exports = siteRoute
-=======
-module.exports = siteRoute
->>>>>>> master
+
+
 
