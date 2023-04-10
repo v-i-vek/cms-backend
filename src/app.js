@@ -2,6 +2,10 @@ const express = require("express");
 const app = express();
 const connectDb = require("./db/conn");
 
+const cookieParser = require("cookie-parser")
+const LoginRoute = require("./route/loginRouter");
+const routeUser =require("./route/userRouter");
+
 const route = require("./route/materialRoute");
 const routequantity = require("./route/QuantityRoute");
 
@@ -15,9 +19,9 @@ const ServiceRoute = require("./route/ServiceRoute")
 // const userroute = require("./route/user");
 const roleRoute = require("./route/role");
 const siteRoute = require('./route/siteManegement.route')
-
+app.use(cookieParser());
 app.use(express.json());
-const DB_URL = "mongodb+srv://root:root@cluster0.63corsg.mongodb.net/test";
+const DB_URL = "mongodb://localhost:27017/";
 connectDb(DB_URL);
 //app.use(userroute);
 app.use(roleRoute)
@@ -28,6 +32,8 @@ app.use(addressRoute)
 app.use(routequantity);
 app.use(routePermission);
 app.use(ServiceRoute);
+app.use(routeUser);
+app.use(LoginRoute);
 app.listen(port, () => {
   console.log(`connnecte ${port}`);
 });
