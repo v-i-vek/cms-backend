@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const connectDb = require("./db/conn");
-
+const cors = require("cors");
 const cookieParser = require("cookie-parser")
 const LoginRoute = require("./route/loginRouter");
 const routeUser =require("./route/userRouter");
@@ -11,7 +11,7 @@ const routequantity = require("./route/QuantityRoute");
 
 const addressRoute = require('./route/address.user.route')
  const port = process.env.PORT || 3001;
-
+const LogOutRoute = require('./route/LogOutRoute');
 const docs = require("./models/DocumentModel");
 const routePermission = require('./route/permission.route')
 const document_master = require("./models/DocumentModel");
@@ -24,6 +24,29 @@ app.use(express.json());
 const DB_URL = "mongodb://localhost:27017/";
 connectDb(DB_URL);
 //app.use(userroute);
+
+
+
+const corsOpts = {
+  origin: '*',
+
+  methods: [
+    'GET',
+    'POST',
+    'DELETE',
+    'PATCH',
+    'PUT'
+  ],
+
+  allowedHeaders: [
+    'Content-Type',
+  ],
+};
+
+app.use(cors(corsOpts));
+
+
+
 app.use(roleRoute)
 app.use("/uploads", express.static("uploads"));
 app.use(route);
@@ -34,6 +57,7 @@ app.use(routePermission);
 app.use(ServiceRoute);
 app.use(routeUser);
 app.use(LoginRoute);
+app.use(LogOutRoute);
 app.listen(port, () => {
   console.log(`connnecte ${port}`);
 });

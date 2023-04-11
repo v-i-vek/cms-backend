@@ -6,7 +6,9 @@ try {
     const token = req.cookies.jwt
     const verifyUser = jwt.verify(token, secret_key  )
     const user = await userModel.findOne({_id:verifyUser._id})
-    console.log(user);
+    //console.log(user);
+    req.token= token;
+    req.user= user;
     next()
 
 } catch (error) {
