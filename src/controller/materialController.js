@@ -1,7 +1,7 @@
 const MaterialModel = require("../models/materialModel");
 //get all materials
 const materialGet = async (req, res) => {
-  try {models
+  try {
     const materialGetData = await MaterialModel.find();
     res.status(201).send(materialGetData);
   } catch (error) {

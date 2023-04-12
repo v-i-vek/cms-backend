@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-//database connection code
 const connectDb =async(DB_URL)=>{
     const DB_OPT={
         dbName :"constructiondb"
