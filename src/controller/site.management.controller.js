@@ -34,27 +34,71 @@ const siteDelete = async (req, res) => {
   try {
     const id = req.params.id;
     const deleteAddress = await siteMangementModel.findByIdAndDelete({ _id: id,});
-    res.status(201).send(deleteAddress);
+   return  res.status(201).send(deleteAddress);
   } catch (error) {
-   res.status(401).send(error.message)
+   return res.status(401).send(error.message)
   }
 };
 // this is for posting the data in db through post method
 const sitePost = async (req, res) => {
   try {
+
+    noOfFloor = req.body.noOfFloor;
+    noOfFlatPerFloor = req.body.noOfFlatPerFloor
+    totalFlat = noOfFloor*noOfFlatPerFloor
+    
+    let flats = []
+    let numberOfFlats = countFlat(noOfFloor,noOfFlatPerFloor,flats)
+// // logic for increasing the value of the flat dynamically 
+//     let temp = 000;
+//     let arr =[]
+//     for(let i = 1;i<=noOfFloor;i++){
+//       let count = temp;
+//       for(let j = 1;j<=noOfFlatPerFloor;j++){
+//         count++
+//         arr.push(count)
+//       }
+//       temp =0;
+//       temp = i*100 +temp
+//     }
+
+
+
+
     const siteManage = new siteMangementModel({
       name: req.body.name,
       category: req.body.category,
       location: req.body.location,
+      noOfFloor:req.body.noOfFloor,
+      noOfFlatPerFloor:req.body.noOfFlatPerFloor,
+      totalFlat : totalFlat,
+      flatNo:numberOfFlats
     });
+    
     if (req.file) {
       siteManage.brandLogo = req.file.path; // this is for checking the valid name and giving the path
     }
     const saved = await siteManage.save();
     return res.status(200).send(saved);
   } catch (error) {
-   res.status(401).send(error.message)
+  return  res.status(401).send(error.message)
   }
 };
+
+function countFlat(noOfFloor,noOfFlatPerFloor,flats){
+  let temp =000
+    for(let i = 1;i<=noOfFloor;i++){
+        let count = temp;
+        for(let j = 1;j<=noOfFlatPerFloor;j++){
+          count++
+          flats.push(count)
+        }
+        temp =0;
+        temp = i*100 +temp
+      }
+      return flats
+}
+
+
 
 module.exports = { sitePost, siteGet, sitePatch, siteDelete, siteAllGet };

@@ -1,10 +1,15 @@
-const ser = require('../models/ServiceModel')
+const ServiceManage = require('../models/ServiceModel');
+const ser= require('../models/ServiceModel')
+
 // added
 exports.createSer = async (req, res) => {
-    const { service_id, service_name, service_desc, service_customize, status } = req.body
+    
     try {
-        const Ser = await ser.create({ service_id, service_name, service_desc, service_customize, status });
-        res.status(201).json(Ser);
+       
+        const Ser =   ServiceManage(req.body);
+      
+     const ans = await Ser.save()
+     return res.send(ans)
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -25,13 +30,17 @@ exports.getSer = async (req, res) => {
 
 exports.updateSer = async (req,res) => {
 
-    const { service_id, service_name, service_desc, service_customize, status } = req.body;
+
     try {
-     console.log(req.params)
-        const Ser = await ser.findByIdAndUpdate({_id: req.params.id}, req.body);
-        const updatedSer = await Ser.save();
-        console.log(Ser)
-        res.json(updatedSer)
+    const id = req.body.params
+        const Ser = await ser.findByIdAndUpdate({_id: id});
+        const update = await ser.updateOne({
+            name:req.body.name,
+            description:req.body.description,
+            customize:req.body.customize
+        })
+        
+        res.json(update)
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -47,3 +56,11 @@ exports.deleteSer = async (req, res) => {
     }
 }
 
+exports.getAll = async (req,res)=>{
+    try {
+        const result = await ser.find()
+        return res.send(result)
+    } catch (error) {
+        return res.send(error)
+    }
+}
