@@ -13,9 +13,28 @@ const siteManageSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  brandLogo: {
-    type: String,
+  noOfFloor:{
+    type:Number,
+    //require:true
   },
+  noOfFlatPerFloor:{
+    type:String,
+   // require:true
+  },
+  totalFlat:{
+    type:String,
+    //require:true
+  },
+  flatNo: [
+    
+  ]
+  // sold:{
+  //   type:String,
+  //   //require
+  // },
+
+
+ 
 });
 
 const siteMangementModel = mongoose.model("siteMangement",siteManageSchema);
