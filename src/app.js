@@ -18,13 +18,14 @@ const document_master = require("./models/DocumentModel");
 const ServiceRoute = require("./route/ServiceRoute")
 // const userroute = require("./route/user");
 const roleRoute = require("./route/role");
-const siteRoute = require('./route/siteManegement.route')
+const siteRoute = require('./route/siteManegement.route');
+const flatRoute = require("./route/addFlat");
 app.use(cookieParser());
 app.use(express.json());
 const DB_URL = "mongodb+srv://root:root@cluster0.63corsg.mongodb.net/test";
 connectDb(DB_URL);
 //app.use(userroute);
-
+app.use(flatRoute)
 
 
 const corsOpts = {

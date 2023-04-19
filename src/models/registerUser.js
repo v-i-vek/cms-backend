@@ -23,6 +23,23 @@ const userSchema = mongoose.Schema({
         // require: true
       }
     }
+  ],
+  flatDetails: [
+    {
+      flatNo: {
+        type: String,
+        // require: true
+      },
+      siteName:{
+        type:String
+      },
+      category:{
+        type:String
+      },
+      location:{
+        type:String
+      }
+    }
   ]
 });
 
