@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const userGet = async (req, res) => {
 
   try {
-    const result = userModel.find()
+    const result = userModel.find().populate('flatUserDetails.siteName')
     const ans = await result;
     return res.status(201).send(ans)
   } catch (error) {
@@ -19,10 +19,23 @@ const userGet = async (req, res) => {
 const userPost = async (req, res) => {
   try {
     console.log("register");
+  
+    const flatNo = req.body.flatNo;
+    const siteName = req.body.siteName;
+  
+    console.log(flatNo)
+    let arr =[];
+    let obj = new Object();
+    obj.flatNo = flatNo;
+    obj.siteName = siteName;
+    arr.push(obj)
+    console.log(arr)
+    
    const userDetailSave = new userModel({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password
+      flatUserDetails:arr
+     
     });
     console.log(userDetailSave);
 
@@ -57,6 +70,9 @@ const updateUser=async(req,res)=>{
   }
 }
 
+
+
+//this is for sending mail to the user
 const userMail = async(req,res)=>{
 
 
@@ -79,14 +95,14 @@ const userMail = async(req,res)=>{
 }
 
 
-
+//function for sending the mail to the
 const sendMail = (userMailId,password)=>{
 
 const transport = nodemailer.createTransport({
   service:"gmail",
   auth:{
       user:"vivek.yadav@volansys.com",
-      pass:"vivek&rajnish@190"
+      pass:"vivek@190&piyush"
    
   }
 })

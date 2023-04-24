@@ -9,18 +9,106 @@ const userSchema = mongoose.Schema({
 
   email: {
     type: String,
-     require: true,
-     unique: true
+    require: true,
+    unique: true
   },
   password: {
     type: String,
     // require: true
   },
+
+  firstName: {
+    type: String,
+    // minlength: 2,
+    // unique: true,
+  },
+
+  lastName: {
+    type: String,
+    //minlength: 2,
+  },
+
+
+
+  mobileNo: {
+    String: Number,
+
+    //minlength: 10,
+  },
+
+  Gender: {
+    type: String,
+  },
+
+  image: {
+    type: String,
+  },
+  address: {
+    type: String,
+    // require: true 
+  },
+  country: {
+    type: String,
+    //require: true,
+  },
+  city: {
+    type: String,
+    // require: true,
+  },
+  state: {
+    type: String,
+    //require: true,
+  },
+  pinCode: {
+    type: String,
+    // require: true
+  },
+  docName: {
+    type: String,
+    // required: true,
+    //minlength: 2,
+  },
+
+  docType: {
+    type: String,
+    // required: true,
+    // unique: true,
+  },
+
+  // status: {
+  //   type: Boolean,
+  //   required: true,
+  // },
+
+  docFile: {
+    type: String,
+  },
+
+
+
   tokens: [
     {
       token: {
         type: String,
         // require: true
+      }
+    }
+  ],
+  flatUserDetails: [
+    {
+      flatNo: {
+        type: String,
+        // require: true
+      },
+      siteName:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'siteMangement'
+    },
+      category: {
+        type: String
+      },
+      location: {
+        type: String
       }
     }
   ]
