@@ -5,7 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser")
 const LoginRoute = require("./route/loginRouter");
 const AddUser =require("./route/AddUser");
-
+const flatRoute = require('./route/flatRoute')
 const route = require("./route/materialRoute");
 const routequantity = require("./route/QuantityRoute");
 
@@ -19,13 +19,14 @@ const ServiceRoute = require("./route/ServiceRoute")
 // const userroute = require("./route/user");
 const roleRoute = require("./route/role");
 const siteRoute = require('./route/siteManegement.route');
-const flatRoute = require("./route/addFlat");
+
 app.use(cookieParser());
 app.use(express.json());
 const DB_URL = "mongodb+srv://root:root@cluster0.63corsg.mongodb.net/test";
 connectDb(DB_URL);
 //app.use(userroute);
-app.use(flatRoute)
+
+app.use(express.urlencoded({urlencoded:false}))
 
 
 const corsOpts = {
@@ -60,6 +61,7 @@ app.use(ServiceRoute);
 app.use(AddUser);
 app.use(LoginRoute);
 app.use(LogOutRoute);
+app.use(flatRoute)
 app.listen(port, () => {
   console.log(`connnecte ${port}`);
 });
