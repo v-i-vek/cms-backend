@@ -67,7 +67,7 @@ const sitePost = async (req, res) => {
 
 
     const siteManage = new siteMangementModel({
-      name: req.body.name,
+      siteName: req.body.siteName,
       category: req.body.category,
       location: req.body.location,
       noOfFloor:req.body.noOfFloor,
