@@ -9,8 +9,8 @@ const userSchema = mongoose.Schema({
 
   email: {
     type: String,
-     require: true,
-     unique: true
+    require: true,
+    unique: true
   },
   password: {
     type: String,
@@ -43,7 +43,8 @@ const userSchema = mongoose.Schema({
   image: {
     type: String,
   },
-  address: { type: String,
+  address: {
+    type: String,
     // require: true 
   },
   country: {
@@ -52,21 +53,19 @@ const userSchema = mongoose.Schema({
   },
   city: {
     type: String,
-   // require: true,
+    // require: true,
   },
   state: {
     type: String,
     //require: true,
   },
-  pinCode: { 
+  pinCode: {
     type: String,
     // require: true
-   },
-
-
-   docName: {
+  },
+  docName: {
     type: String,
-   // required: true,
+    // required: true,
     //minlength: 2,
   },
 
@@ -101,14 +100,14 @@ const userSchema = mongoose.Schema({
         type: String,
         // require: true
       },
-      siteName:{
-        type:String
+      siteName: {
+        type: String
       },
-      category:{
-        type:String
+      category: {
+        type: String
       },
-      location:{
-        type:String
+      location: {
+        type: String
       }
     }
   ]
