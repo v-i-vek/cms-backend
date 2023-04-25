@@ -10,7 +10,7 @@ const route = require("./route/materialRoute");
 const routequantity = require("./route/QuantityRoute");
 
 const addressRoute = require('./route/address.user.route')
- const port = process.env.PORT || 3000;
+ const port = process.env.PORT || 3001;
 const LogOutRoute = require('./route/LogOutRoute');
 const docs = require("./models/DocumentModel");
 const routePermission = require('./route/permission.route')
@@ -22,7 +22,7 @@ const siteRoute = require('./route/siteManegement.route');
 
 app.use(cookieParser());
 app.use(express.json());
-const DB_URL = "mongodb+srv://root:root@cluster0.63corsg.mongodb.net/test";
+const DB_URL = "mongodb://localhost:27017/";
 connectDb(DB_URL);
 //app.use(userroute);
 
