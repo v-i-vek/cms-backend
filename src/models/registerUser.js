@@ -114,19 +114,19 @@ const userSchema = mongoose.Schema({
   ]
 });
 
-// userSchema.methods.generateAuthToken = async function() {
-//   try {
-//     secret_key = "mynameiskamleshdhelloistheworldisfirstprintedinprogramwhen";
-//     //console.log(this._id);
-//     const token = jwt.sign({ _id: this._id.toString() }, secret_key);
-//     this.tokens = this.tokens.concat({ token: token });
-//     await this.save();
-//     console.log(token);
-//     return token;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+userSchema.methods.generateAuthToken = async function() {
+  try {
+    secret_key = "mynameiskamleshdhelloistheworldisfirstprintedinprogramwhen";
+    //console.log(this._id);
+    const token = jwt.sign({ _id: this._id.toString() }, secret_key);
+    this.tokens = this.tokens.concat({ token: token });
+    await this.save();
+    console.log(token);
+    return token;
+  } catch (error) {
+    console.log(error);
+  }
+};
 // userSchema.pre("save", async function(next) {
 //   if (this.isModified("password")) {
 //     console.log(this.password);
@@ -135,5 +135,5 @@ const userSchema = mongoose.Schema({
 //   }
 //   next();
 // });
-const userModel = mongoose.model("AddUser", userSchema);
+const userModel = mongoose.model("user", userSchema);
 module.exports = userModel;
