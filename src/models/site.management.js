@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const siteManageSchema = mongoose.Schema({
-  name: {
+  siteName: {
     type: String,
     require: true,
   },

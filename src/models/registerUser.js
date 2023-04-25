@@ -94,15 +94,16 @@ const userSchema = mongoose.Schema({
       }
     }
   ],
-  flatDetails: [
+  flatUserDetails: [
     {
       flatNo: {
         type: String,
         // require: true
       },
-      siteName: {
-        type: String
-      },
+      siteName:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'siteMangement'
+    },
       category: {
         type: String
       },
@@ -134,5 +135,5 @@ userSchema.methods.generateAuthToken = async function() {
 //   }
 //   next();
 // });
-const userModel = mongoose.model("user", userSchema);
+const userModel = mongoose.model("adduser", userSchema);
 module.exports = userModel;
