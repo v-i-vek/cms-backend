@@ -25,8 +25,19 @@ const siteManageSchema = mongoose.Schema({
     type:String,
     //require:true
   },
-  flatNo: [
-    
+  flatDetails: [
+    {
+      flatNo: {
+        type: String,
+        // require: true
+      },
+      userId:{
+        type:String
+      },
+      isBought:{
+        type:Boolean
+      }
+    }
   ]
   // sold:{
   //   type:String,

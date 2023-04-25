@@ -49,6 +49,7 @@ const sitePost = async (req, res) => {
     
     let flats = []
     let numberOfFlats = countFlat(noOfFloor,noOfFlatPerFloor,flats)
+    console.log(numberOfFlats)
 // // logic for increasing the value of the flat dynamically 
 //     let temp = 000;
 //     let arr =[]
@@ -72,7 +73,7 @@ const sitePost = async (req, res) => {
       noOfFloor:req.body.noOfFloor,
       noOfFlatPerFloor:req.body.noOfFlatPerFloor,
       totalFlat : totalFlat,
-      flatNo:numberOfFlats
+      flatDetails:numberOfFlats
     });
     
     if (req.file) {
@@ -86,19 +87,22 @@ const sitePost = async (req, res) => {
 };
 
 function countFlat(noOfFloor,noOfFlatPerFloor,flats){
-  let temp =000
+  let temp =100
     for(let i = 1;i<=noOfFloor;i++){
         let count = temp;
         for(let j = 1;j<=noOfFlatPerFloor;j++){
           count++
-          flats.push(count)
+          let flat = new Object()
+          flat.flatNo= count,
+          flat.userId=null,
+          flat.isBought=false
+          flats.push(flat)
         }
         temp =0;
-        temp = i*100 +temp
+        temp = (i+1)*100 
       }
       return flats
 }
-
 
 
 module.exports = { sitePost, siteGet, sitePatch, siteDelete, siteAllGet };
