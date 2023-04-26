@@ -1,19 +1,27 @@
 const ServiceManage = require('../models/ServiceModel');
-const ser= require('../models/ServiceModel')
+const ser = require('../models/ServiceModel')
+ServiceManage
 
-// added
-exports.createSer = async (req, res) => {
-    
+exports.createSer = async (req,res) =>{
     try {
-       
         const Ser =   ServiceManage(req.body);
-      
-     const ans = await Ser.save()
-     return res.send(ans)
-    } catch (err) {
-        res.status(400).json({ message: err.message });
+        if (req.file) {
+            console.log("img")
+            
+            Ser.serviceimage = req.file.path;
+            console.log(Ser.serviceimage)
+        }
+        await Ser.save().then(()=>{
+            console.log("saved success");
+                res.status(201).send(Ser);
+            })
+
+    } catch (e) {
+        console.log(e);
+        res.status(500).send(e);
     }
 };
+
 
 exports.getSer = async (req, res) => {
     try {
@@ -25,22 +33,17 @@ exports.getSer = async (req, res) => {
         res.status(404).json({ message: 'service not found' });
     }
 
-
 };
 
-exports.updateSer = async (req,res) => {
+exports.updateSer = async (req, res) => {
 
-
+    const { name, description,customize, } = req.body;
     try {
-    const id = req.body.params
-        const Ser = await ser.findByIdAndUpdate({_id: id});
-        const update = await ser.updateOne({
-            name:req.body.name,
-            description:req.body.description,
-            customize:req.body.customize
-        })
-        
-        res.json(update)
+        console.log(req.params)
+        const Ser = await ser.findByIdAndUpdate({ _id: req.params.id }, req.body);
+        const updatedSer = await Ser.save();
+        console.log(Ser)
+        res.json(updatedSer)
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -55,12 +58,12 @@ exports.deleteSer = async (req, res) => {
         res.status(404).json({ message: "user not found" });
     }
 }
-
-exports.getAll = async (req,res)=>{
+exports.getAll = async(req,res)=>{
     try {
         const result = await ser.find()
-        return res.send(result)
+    res.send(result)
     } catch (error) {
-        return res.send(error)
+        res.send({message:"error "})
     }
+    
 }
