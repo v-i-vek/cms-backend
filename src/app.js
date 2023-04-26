@@ -8,7 +8,7 @@ const AddUser =require("./route/AddUser");
 const flatRoute = require('./route/flatRoute')
 const route = require("./route/materialRoute");
 const routequantity = require("./route/QuantityRoute");
-
+const materialRoute= require("./route/materialRoute");
 const addressRoute = require('./route/address.user.route')
  const port = process.env.PORT || 3000;
 const LogOutRoute = require('./route/LogOutRoute');
@@ -61,7 +61,8 @@ app.use(ServiceRoute);
 app.use(AddUser);
 app.use(LoginRoute);
 app.use(LogOutRoute);
-app.use(flatRoute)
+app.use(flatRoute);
+app.use(materialRoute);
 app.listen(port, () => {
   console.log(`connnecte ${port}`);
 });
