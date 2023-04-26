@@ -1,5 +1,8 @@
 const {siteMangementModel} = require("../models/site.management");
 
+
+
+
 // this is the get Method for reading the data
 const siteGet = async (req, res) => {
   const result = await siteMangementModel.findById(req.params.id);
@@ -50,21 +53,6 @@ const sitePost = async (req, res) => {
     let flats = []
     let numberOfFlats = countFlat(noOfFloor,noOfFlatPerFloor,flats)
     console.log(numberOfFlats)
-// // logic for increasing the value of the flat dynamically 
-//     let temp = 000;
-//     let arr =[]
-//     for(let i = 1;i<=noOfFloor;i++){
-//       let count = temp;
-//       for(let j = 1;j<=noOfFlatPerFloor;j++){
-//         count++
-//         arr.push(count)
-//       }
-//       temp =0;
-//       temp = i*100 +temp
-//     }
-
-
-
 
     const siteManage = new siteMangementModel({
       siteName: req.body.siteName,
@@ -105,4 +93,63 @@ function countFlat(noOfFloor,noOfFlatPerFloor,flats){
 }
 
 
-module.exports = { sitePost, siteGet, sitePatch, siteDelete, siteAllGet };
+
+
+
+const flatFalse = async(req,res)=>{
+
+  try {
+    //const Flat = await siteMangementModel.find().select('flatDetails.isBought').where('flatDetails.isBought').equals(true)
+    //let check = Flat.select('flatDetails')
+    const Flat = await siteMangementModel.find().select('flatDetails')
+    
+    let arr = []
+    arr.push(Flat)
+ 
+   
+
+  //    //console.log("value is coming",arr[0][1])
+  //   // let y = arr[0][0].flatDetails[1].flatNo
+  //  // console.log(y)
+  //  let test = [];
+
+  //  let t  = arr[0].map((value,index,array)=>{
+  //   console.log(value)
+  //   console.log(array);
+
+  //  })
+ 
+      for(let i=0; i< arr[0][i].flatDetails.length-1;i++){
+       for(let j = 0; j<arr[0][i].flatDetails.length;j++){
+        let obj = new Object()
+          if(arr[0][i].flatDetails[j].isBought){
+            console.log(arr[0][i].flatDetails[j].flatNo)
+        console.log(arr[0][i].flatDetails[j].isBought)
+          }
+  
+        }
+      
+     }
+
+    
+   // console.log(arr[0])
+ 
+   // arr.filter
+  // await filter()
+    res.send(Flat)
+  } catch (error) {
+    console.log(error)
+    res.send(error)
+  }
+}
+
+
+
+
+
+
+
+
+
+
+module.exports = { sitePost, siteGet, sitePatch, siteDelete, siteAllGet,flatFalse };
