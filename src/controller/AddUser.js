@@ -1,6 +1,7 @@
 const userModel = require("../models/registerUser");
 const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt')
+const {siteMangementModel} = require('../models/site.management')
 
 const userGet = async (req, res) => {
 
@@ -18,18 +19,26 @@ const userGet = async (req, res) => {
 };
 const userPost = async (req, res) => {
   try {
-    console.log("register");
-  
+   
+  console.log()
     const flatNo = req.body.flatNo;
-    const siteName = req.body.siteName;
+    const siteNameobj = req.body.siteName;
+   
+
+    //findSiteFlat(req,res,flatNo,siteNameobj);
+
+
+
+
+
   
-    console.log(flatNo)
+   
     let arr =[];
     let obj = new Object();
     obj.flatNo = flatNo;
     obj.siteName = siteName;
     arr.push(obj)
-    console.log(arr)
+    
     
    const userDetailSave = new userModel({
       name: req.body.name,
@@ -37,7 +46,7 @@ const userPost = async (req, res) => {
       flatUserDetails:arr
      
     });
-    console.log(userDetailSave);
+   
 
 
     // const token = await userDetailSave.generateAuthToken(); //Adding cookies
@@ -129,7 +138,16 @@ transport.sendMail(options,function(err,info){
 
 
 
+async function findSiteFlat(req,res,flatNo,siteName){
+  try {
 
+    console.log("cpojdsofjasodf",siteName);
+    const findIsBoought =await siteMangementModel.findOne({_id:siteName}).select('flatDetails.flatNo:101')
+    console.log("---->",findIsBoought)
+  } catch (error) {
+    console.log('=====>',error)
+  }
+}
 
 
 

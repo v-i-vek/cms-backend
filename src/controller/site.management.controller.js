@@ -11,8 +11,13 @@ const siteGet = async (req, res) => {
 // getting all the data
 const siteAllGet = async (req, res) => {
   try {
-    const result = await siteMangementModel.find();
-    return res.status(201).send(result);
+    const Flat = await siteMangementModel.find();
+    Flat.forEach((obj)=>{
+          obj.flatDetails = obj.flatDetails.filter((data)=>{
+              return data.isBought === false
+          })
+      })
+    return res.status(201).send(Flat);
   } catch (error) {
     return res.status(401).send(error);
   }
@@ -22,14 +27,25 @@ const sitePatch = async (req, res) => {
   try {
     const id = req.params.id;
     const result = await siteMangementModel.findById({ _id: id });
+    noOfFloor = req.body.noOfFloor;
+    noOfFlatPerFloor = req.body.noOfFlatPerFloor
+    totalFlat = noOfFloor*noOfFlatPerFloor
+        
+    let flats = []
+    let numberOfFlats = countFlat(noOfFloor,noOfFlatPerFloor,flats)
+    
     const update = await result.updateOne({
       name: req.body.name,
       siteId: req.body.id,
       location: req.body.location,
+      noOfFloor:req.body.noOfFloor,
+      noOfFlatPerFloor:req.body.noOfFlatPerFloor,
+      totalFlat : totalFlat,
+      flatDetails:numberOfFlats
     });
-    res.status(201).send("successful");
+    res.status(201).send({message:"successful"});
   } catch (error) {
-    res.status(401).send(error);
+    res.status(401).send({message:error});
   }
 };
 // this method is to delete the data from the db
@@ -45,7 +61,7 @@ const siteDelete = async (req, res) => {
 // this is for posting the data in db through post method
 const sitePost = async (req, res) => {
   try {
-
+    
     noOfFloor = req.body.noOfFloor;
     noOfFlatPerFloor = req.body.noOfFlatPerFloor
     totalFlat = noOfFloor*noOfFlatPerFloor
@@ -96,52 +112,6 @@ function countFlat(noOfFloor,noOfFlatPerFloor,flats){
 
 
 
-const flatFalse = async(req,res)=>{
-
-  try {
-    //const Flat = await siteMangementModel.find().select('flatDetails.isBought').where('flatDetails.isBought').equals(true)
-    //let check = Flat.select('flatDetails')
-    const Flat = await siteMangementModel.find().select('flatDetails')
-    
-    let arr = []
-    arr.push(Flat)
- 
-   
-
-  //    //console.log("value is coming",arr[0][1])
-  //   // let y = arr[0][0].flatDetails[1].flatNo
-  //  // console.log(y)
-  //  let test = [];
-
-  //  let t  = arr[0].map((value,index,array)=>{
-  //   console.log(value)
-  //   console.log(array);
-
-  //  })
- 
-      for(let i=0; i< arr[0][i].flatDetails.length-1;i++){
-       for(let j = 0; j<arr[0][i].flatDetails.length;j++){
-        let obj = new Object()
-          if(arr[0][i].flatDetails[j].isBought){
-            console.log(arr[0][i].flatDetails[j].flatNo)
-        console.log(arr[0][i].flatDetails[j].isBought)
-          }
-  
-        }
-      
-     }
-
-    
-   // console.log(arr[0])
- 
-   // arr.filter
-  // await filter()
-    res.send(Flat)
-  } catch (error) {
-    console.log(error)
-    res.send(error)
-  }
-}
 
 
 
@@ -151,5 +121,4 @@ const flatFalse = async(req,res)=>{
 
 
 
-
-module.exports = { sitePost, siteGet, sitePatch, siteDelete, siteAllGet,flatFalse };
+module.exports = { sitePost, siteGet, sitePatch, siteDelete, siteAllGet };

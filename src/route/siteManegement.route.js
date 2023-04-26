@@ -1,6 +1,6 @@
 const express = require('express')
 
-const {siteGet,sitePost,sitePatch, siteDelete ,upload_File,siteAllGet,flatFalse} = require('../controller/site.management.controller')
+const {siteGet,sitePost,sitePatch, siteDelete ,upload_File,siteAllGet,} = require('../controller/site.management.controller')
 const uploads = require('../middleware/site.uploads')
 
 const siteRoute = express.Router()
@@ -11,7 +11,6 @@ siteRoute.post('/postSite',uploads.single('image'),sitePost)// in uploads.single
 siteRoute.patch('/updateSite/:id',sitePatch)
 siteRoute.delete('/deleteSite/:id',siteDelete)
 
-siteRoute.get('/getFalse',flatFalse)
 
 
 
