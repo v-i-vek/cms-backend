@@ -17,6 +17,23 @@ const userGet = async (req, res) => {
 
   return await res.send("register");
 };
+
+const usersingleGet = async (req, res) => {
+
+  try {
+    const result = userModel.findOne({_id:req.params.id}).populate('flatUserDetails.siteName')
+    const ans = await result;
+    return res.status(201).send(ans)
+  } catch (error) {
+    console.log(error)
+  return   res.status(400).send({message:'error'})
+  }
+
+
+  return await res.send("register");
+};
+
+
 const userPost = async (req, res) => {
   try {
    
@@ -165,4 +182,4 @@ async function findSiteFlat(req,res,flatNo,siteName){
 
 
 
-module.exports = { userGet, userPost,updateUser ,userMail};
+module.exports = { userGet, userPost,updateUser,usersingleGet ,userMail};

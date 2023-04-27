@@ -3,9 +3,9 @@ const {siteMangementModel} = require("../models/site.management");
 
 
 
-// this is the get Method for reading the data
+// this is the get Method for reading the data for only one user
 const siteGet = async (req, res) => {
-  const result = await siteMangementModel.findById(req.params.id);
+  const result = await siteMangementModel.findOne(req.params.email);
   res.status(201).send(result)
 };
 // getting all the data
