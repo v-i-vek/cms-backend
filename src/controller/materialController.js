@@ -2,7 +2,7 @@ const MaterialModel = require("../models/materialModel");
 //get all materials
 const materialGet = async (req, res) => {
   try {
-    const materialGetData = await MaterialModel.find();
+    const materialGetData = await MaterialModel.find().populate("site_id");
     res.status(201).send(materialGetData);
   } catch (error) {
     res.status(401).send(error.message);
@@ -15,7 +15,7 @@ const materialGetSingle = async (req, res) => {
     const materialGetDatasin = await MaterialModel.findById(_Id)
     .populate(`Quantity_id`)
     .populate(`site_id`)
-    .populate(`flat_id`);
+    // .populate(`flat_id`);
     res.status(201).send(materialGetDatasin);
   } catch (error) {
     res.status(401).send(error.message);

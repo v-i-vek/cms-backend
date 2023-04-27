@@ -8,8 +8,8 @@ const {
 } = require("../controller/materialController");
 const upload = require("../middleware/material_upload");
 const materialRoute = express.Router();
-materialRoute.get("/getmaterial", materialGet);
-materialRoute.get("/getmaterial/:id", materialGetSingle);
+materialRoute.get("/getmaterial/", materialGet);
+materialRoute.get("/getmaterial", materialGetSingle);
 materialRoute.post("/postmaterial", upload.single("Material_img"), materialPost);
 materialRoute.patch("/patchmaterial/:id", materialUpdate);
 materialRoute.delete("/deletematerial/:id", materialDelete);
