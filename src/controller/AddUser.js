@@ -22,10 +22,10 @@ const userPost = async (req, res) => {
    
   console.log()
     const flatNo = req.body.flatNo;
-    const siteNameobj = req.body.siteName;
+    const siteName = req.body.siteName;
    
 
-    //findSiteFlat(req,res,flatNo,siteNameobj);
+    findSiteFlat(req,res,flatNo,siteName);
 
 
 
@@ -142,7 +142,7 @@ async function findSiteFlat(req,res,flatNo,siteName){
   try {
 
     console.log("cpojdsofjasodf",siteName);
-    const findIsBoought =await siteMangementModel.findOne({_id:siteName}).select('flatDetails.flatNo:101')
+    const findIsBoought =await siteMangementModel.findOne({_id:siteName}).select('flatDetails')
     console.log("---->",findIsBoought)
   } catch (error) {
     console.log('=====>',error)
