@@ -52,7 +52,7 @@ const materialDelete = async (req, res) => {
 //insert material
 const materialPost = async (req, res) => {
   try {
-    const materialPostData = await MaterialModel(req.body);
+    const materialPostData = MaterialModel(req.body);
     if (req.file) {
         //insert img line
       materialPostData.Material_img = req.file.path;
@@ -60,8 +60,10 @@ const materialPost = async (req, res) => {
     materialPostData.Quantity_id = req.body.Quantity_id;
     materialPostData.flat_id = req.body.flat_id;
     materialPostData.site_id = req.body.site_id;
-    const dataPostMat = materialPostData.save();
-    res.status(201).send(dataPostMat);
+   await materialPostData.save().then(()=>{
+    console.log("saved");
+    res.status(201).send(materialPostData);
+   })
   } catch (error) {
     res.status(401).send(error.message);
   }
