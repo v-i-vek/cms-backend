@@ -2,7 +2,7 @@ const MaterialModel = require("../models/materialModel");
 //get all materials
 const materialGet = async (req, res) => {
   try {
-    const materialGetData = await MaterialModel.find().populate("site_id");
+    const materialGetData = await MaterialModel.find().populate("site_id").populate("user_id");
     res.status(201).send(materialGetData);
   } catch (error) {
     res.status(401).send(error.message);

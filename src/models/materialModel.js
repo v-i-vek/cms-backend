@@ -25,6 +25,10 @@ const MaterialSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "flatModel",
   },
+  user_id:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "adduser",
+  },
   Material_cost: {
     type: Number,
   },
