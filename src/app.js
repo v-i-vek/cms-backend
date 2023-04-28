@@ -8,13 +8,14 @@ const AddUser =require("./route/AddUser");
 const flatRoute = require('./route/flatRoute')
 const route = require("./route/materialRoute");
 const routequantity = require("./route/QuantityRoute");
-
+const materialRoute= require("./route/materialRoute");
 const addressRoute = require('./route/address.user.route')
  const port = process.env.PORT || 3000;
 const LogOutRoute = require('./route/LogOutRoute');
 const docs = require("./models/DocumentModel");
 const routePermission = require('./route/permission.route')
 const document_master = require("./models/DocumentModel");
+const contactRoute=require("./route/contactRoute");
 const ServiceRoute = require("./route/ServiceRoutes")
 // const userroute = require("./route/user");
 const roleRoute = require("./route/role");
@@ -59,9 +60,11 @@ app.use(routequantity);
 app.use(routePermission);
 app.use(ServiceRoute);
 app.use(AddUser);
+app.use(contactRoute);
 app.use(LoginRoute);
 app.use(LogOutRoute);
-app.use(flatRoute)
+app.use(flatRoute);
+app.use(materialRoute);
 app.listen(port, () => {
   console.log(`connnecte ${port}`);
 });
