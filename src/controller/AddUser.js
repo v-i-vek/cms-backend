@@ -72,9 +72,10 @@ const updateUser = async (req, res) => {
       city:req.body.city,
       state:req.body.state,
       gender:req.body.gender,
+      pinCode:req.body.pinCode
 
     });
-    res.status(201).send({message:"successful"});
+    res.status(201).send({message:"successful",update});
   } catch (error) {
     res.status(401).send({message:"error"});
   }
