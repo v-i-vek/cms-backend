@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const QuantitySc = require("./QuantityModel");
+const mongoose = require("mongoose");
 const MaterialSchema = new mongoose.Schema({
 
   Material_name: {
@@ -15,15 +14,12 @@ const MaterialSchema = new mongoose.Schema({
     ref: "quantity_master",
   },
 
-  site_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "siteMangement",
-    // require:true
-  },
-
-  flat_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "flatModel",
+  site_id:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"siteMangement"
+},
+   unit:{
+    type:String
   },
   user_id:{
     type: mongoose.Schema.Types.ObjectId,
@@ -35,7 +31,11 @@ const MaterialSchema = new mongoose.Schema({
   Material_status: {
     type: Boolean,
   },
+  Material_img: {
+    type: String,
+  },
 });
+
 
 const MaterialModel = new mongoose.model('material_master', MaterialSchema);
 module.exports = MaterialModel;

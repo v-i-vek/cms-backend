@@ -9,4 +9,5 @@ router.patch('/services/:id', SerController.updateSer);
 router.delete('/services/:id',SerController.deleteSer);
 router.get('/service' , SerController.getAll)
 
+
 module.exports = router;

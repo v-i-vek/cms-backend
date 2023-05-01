@@ -12,11 +12,15 @@ const materialRoute= require("./route/materialRoute");
 const addressRoute = require('./route/address.user.route')
  const port = process.env.PORT || 3000;
 const LogOutRoute = require('./route/LogOutRoute');
-const docs = require("./models/DocumentModel");
 const routePermission = require('./route/permission.route')
+<<<<<<< HEAD
 const document_master = require("./models/DocumentModel");
 const contactRoute=require("./route/contactRoute");
 const ServiceRoute = require("./route/ServiceRoutes")
+=======
+const contactRoute=require("./route/contactRoute");
+ const ServiceRoute = require("./route/ServiceRoutes")
+>>>>>>> origin/main
 // const userroute = require("./route/user");
 const roleRoute = require("./route/role");
 const siteRoute = require('./route/siteManegement.route');
