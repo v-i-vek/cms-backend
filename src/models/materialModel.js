@@ -14,30 +14,13 @@ const MaterialSchema = new mongoose.Schema({
     ref: "quantity_master",
   },
 
-  unit:{
-    type:String
-  },
-
   site_id:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"siteMangement"
 },
-  
-  siteName: {
-    type: String,
-    required: true,
+   unit:{
+    type:String
   },
-
-  flat_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "flatDetails",
-  },
-
-  flatNo: {
-    type: String,
-    required: true,
-  },
-
   user_id:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "adduser",
