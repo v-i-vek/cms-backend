@@ -14,7 +14,7 @@ const addressRoute = require('./route/address.user.route')
 const LogOutRoute = require('./route/LogOutRoute');
 const routePermission = require('./route/permission.route')
 const contactRoute=require("./route/contactRoute");
-// const ServiceRoute = require("./route/ServiceRoutes")
+ const ServiceRoute = require("./route/ServiceRoutes")
 // const userroute = require("./route/user");
 const roleRoute = require("./route/role");
 const siteRoute = require('./route/siteManegement.route');
@@ -56,7 +56,7 @@ app.use(siteRoute)
 app.use(addressRoute)
 app.use(routequantity);
 app.use(routePermission);
-// app.use(ServiceRoute);
+app.use(ServiceRoute);
 app.use(AddUser);
 app.use(contactRoute);
 app.use(LoginRoute);
