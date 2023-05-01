@@ -6,7 +6,7 @@ const {
   userafterLoginGet
 } = require("../controller/loginController");
 const auth = require("../middleware/auth");
-LoginRoute.get("/login", auth, userLoginGet);
+LoginRoute.get("/login", userLoginGet);
 LoginRoute.post("/login", userLoginPost);
 //LoginRoute.get('/secret',auth,userafterLoginGet)
 module.exports = LoginRoute;

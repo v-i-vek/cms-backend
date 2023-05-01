@@ -66,11 +66,18 @@ const updateUser = async (req, res) => {
     const result = await userModel.findById({ _id: id });
     const update = await result.updateOne({
       name: req.body.name,
-      email: req.body.email
+      email: req.body.email,
+      address:req.body.address,
+      country:req.body.country,
+      city:req.body.city,
+      state:req.body.state,
+      gender:req.body.gender,
+      pinCode:req.body.pinCode
+
     });
-    res.status(201).send("successful");
+    res.status(201).send({message:"successful",update});
   } catch (error) {
-    res.status(401).send(error);
+    res.status(401).send({message:"error"});
   }
 }
 

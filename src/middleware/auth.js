@@ -5,7 +5,7 @@ try {
     const secret_key="mynameiskamleshdhelloistheworldisfirstprintedinprogramwhen"
     const token = req.cookies.jwt
     const verifyUser = jwt.verify(token, secret_key  )
-    const user = await userModel.findOne({_id:verifyUser._id})
+    // const user = await userModel.findOne({_id:verifyUser._id})
     //console.log(user);
     req.token= token;
     req.user= user;
@@ -16,3 +16,4 @@ try {
 }
 }
 module.exports = auth
+

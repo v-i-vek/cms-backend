@@ -2,7 +2,7 @@ const MaterialModel = require("../models/materialModel");
 //get all materials
 const materialGet = async (req, res) => {
   try {
-    const materialGetData = await MaterialModel.find().populate('site_id').populate("user_id");
+    const materialGetData = await MaterialModel.find().populate("site_id").populate("user_id");
     res.status(201).send(materialGetData);
   } catch (error) {
     res.status(401).send(error.message);
@@ -13,8 +13,9 @@ const materialGetSingle = async (req, res) => {
   try {
     const _Id = req.params.id;
     const materialGetDatasin = await MaterialModel.findById(_Id)
+    .populate(`Quantity_id`)
     .populate(`site_id`)
-    .populate('user_id')
+    // .populate(`flat_id`);
     res.status(201).send(materialGetDatasin);
   } catch (error) {
     res.status(401).send(error.message);
@@ -58,15 +59,17 @@ const materialDelete = async (req, res) => {
 //insert material
 const materialPost = async (req, res) => {
   try {
-    const materialPostData = new MaterialModel(req.body);
+    const materialPostData = MaterialModel(req.body);
     if (req.file) {
       materialPostData.Material_img = req.file.path;
     }
     materialPostData.Quantity_id = req.body.Quantity_id;
+    materialPostData.flat_id = req.body.flat_id;
     materialPostData.site_id = req.body.site_id;
-    console.log("res",materialPostData);
-    await materialPostData.save();
+   await materialPostData.save().then(()=>{
+    console.log("saved");
     res.status(201).send(materialPostData);
+   })
   } catch (error) {
     res.status(401).send(error.message);
   }
