@@ -38,7 +38,10 @@ const siteManageSchema = mongoose.Schema({
         type:Boolean
       }
     }
-  ]
+  ],
+  brandLogo:{
+    type:String
+  }
   // sold:{
   //   type:String,
   //   //require
