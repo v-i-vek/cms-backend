@@ -1,4 +1,5 @@
 const userModel = require("../models/registerUser");
+// nodemailer
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const { siteMangementModel } = require("../models/site.management");
