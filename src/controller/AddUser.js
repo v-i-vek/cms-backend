@@ -22,6 +22,7 @@ const usersingleGet = async (req, res) => {
     const result = userModel
       .findOne({ _id: req.params.id })
       .populate("flatUserDetails.siteName");
+      //ddddd
     const ans = await result;
     return res.status(201).send(ans);
   } catch (error) {
