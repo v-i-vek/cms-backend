@@ -47,9 +47,13 @@ const userPost = async (req, res) => {
     const userDetailSave = new userModel({
       name: req.body.name,
       email: req.body.email,
-      role: "user",
-      flatUserDetails: arr,
+      role: "user", 
+      image:"/home/kamleshkalal/Music/git 3/construction_management/src/uploads/users.png",
+      flatUserDetails: arr
+     
     });
+
+
     const result = await userDetailSave.save();
     return res.status(201).send();
   } catch (error) {
