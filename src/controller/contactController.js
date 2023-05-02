@@ -38,7 +38,8 @@ const contactDelete = async (req, res) => {
 const contactPost = async (req, res) => {
   try {
     const contact = await ContactModel(req.body);
-    const savedContact = await contact.save();
+    console.log(contact);
+    const savedContact = contact.save();
     res.status(201).send(savedContact);
   } catch (e) {
     res.status(500).send(e);
