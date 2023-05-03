@@ -1,4 +1,5 @@
 const userModel = require("../models/registerUser");
+// nodemailer
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const { siteMangementModel } = require("../models/site.management");
@@ -21,6 +22,7 @@ const usersingleGet = async (req, res) => {
     const result = userModel
       .findOne({ _id: req.params.id })
       .populate("flatUserDetails.siteName");
+      //ddddd
     const ans = await result;
     return res.status(201).send(ans);
   } catch (error) {
