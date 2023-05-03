@@ -31,7 +31,7 @@ const MaterialSchema = new mongoose.Schema({
   Material_status: {
     type: Boolean,
   },
-  Material_img: {
+ image: {
     type: String,
   },
 });

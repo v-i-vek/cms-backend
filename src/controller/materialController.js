@@ -27,19 +27,30 @@ const materialUpdate = async (req, res) => {
     const id = req.params.id;
     console.log(">>>>>>>>>",id)
     const result = await MaterialModel.findById({ _id: id });
-    console.log(">>>>>>>>",result)
-    const update = await result.updateOne({
-      Material_name : req.body.Material_name,
-      Material_quantity: req.body.Material_quantity,
+      Material_name = req.body.Material_name,
+      Material_quantity= req.body.Material_quantity,
       //Quantity_id : req.body. Quantity_id,
-     site_id: req.body.site_id,
-      Material_cost: req.body.Material_cost,
-      Material_status: req.body.Material_status
+     site_id=req.body.site_id,
+      Material_cost= req.body.Material_cost,
+      Material_status= req.body.Material_status
      
-    });
+      let image;
+      if (req.file) {
+        image = await req.file.path;
+       
+        console.log(image)// this is for checking the valid name and giving the path
+      }
+      console.log(req.body)
+      try {
+        const data = req.body
+        data.image=req.file.path
     res.status(201).send(result);
   } catch (error) {
     res.status(401).send(error.message);
+  }
+  } catch (error) {
+    
+    res.status(401).send({ message: error });
   }
 };
 //delete materials the materials
@@ -61,7 +72,7 @@ const materialPost = async (req, res) => {
   try {
     const materialPostData = MaterialModel(req.body);
     if (req.file) {
-      materialPostData.Material_img = req.file.path;
+      materialPostData.Materialimg = req.file.path;
     }
     materialPostData.Quantity_id = req.body.Quantity_id;
     materialPostData.flat_id = req.body.flat_id;

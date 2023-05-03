@@ -1,22 +1,16 @@
-const path = require("path");
 const multer = require("multer");
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../uploads"));
-    },
+var Storage = multer.diskStorage({
+    destination:"material_img_uploads",
     filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-        cb(null, file.originalname);
-    }
+        cb(null,file.originalname);
+    },
 });
-
-var upload = multer({
-    storage: storage,
+var uploads = multer({
+    storage: Storage,
     fileFilter: function (req, file, callback) {
-        if (file.mimetype == "image/jpeg" || file.mimetype == "image/png") {
+        if (file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/jpg") {
             callback(null, true);
         } else {
-            console.log("upload only jpeg and png files");
             callback(null, false);
         }
     },
@@ -24,4 +18,4 @@ var upload = multer({
         fieldSize: 1024 * 1024 * 10
     }
 });
-module.exports = upload;
+module.exports = uploads;
