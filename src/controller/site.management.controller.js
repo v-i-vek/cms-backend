@@ -31,17 +31,26 @@ const sitePatch = async (req, res) => {
     let flats = [];
     let numberOfFlats = countFlat(noOfFloor, noOfFlatPerFloor, flats);
 
-    const update = await result.updateOne({
-      name: req.body.name,
-      siteId: req.body.id,
-      location: req.body.location,
-      noOfFloor: req.body.noOfFloor,
-      noOfFlatPerFloor: req.body.noOfFlatPerFloor,
-      totalFlat: totalFlat,
-      flatDetails: numberOfFlats,
-    });
-    res.status(201).send({ message: "successful" });
+    let image;
+    if (req.file) {
+      image = await req.file.path;
+     
+      console.log(image)// this is for checking the valid name and giving the path
+    }
+    console.log(req.body)
+    try {
+      const data = req.body
+      data.brandLogo=req.file.path
+      const update = await siteMangementModel.findByIdAndUpdate(id,data,{new:true});
+      console.log("update",update)
+      res.status(201).send({message:"successfully"});
+    } catch (error) {
+      console.log(error);
+    }
+  
+    
   } catch (error) {
+    
     res.status(401).send({ message: error });
   }
 };

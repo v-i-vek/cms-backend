@@ -8,7 +8,7 @@ const siteRoute = express.Router()
 siteRoute.get('/getSite/:id',siteGet)
 siteRoute.get('/getAllDetails',siteAllGet)
 siteRoute.post('/postSite',uploads.single('image'),sitePost)// in uploads.single ==>siteImage is must be written in the form as key
-siteRoute.patch('/updateSite/:id',sitePatch)
+siteRoute.patch('/updateSite/:id',uploads.single('image'),sitePatch)
 siteRoute.delete('/deleteSite/:id',siteDelete)
 
 
