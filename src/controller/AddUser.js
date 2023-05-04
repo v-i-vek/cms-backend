@@ -122,16 +122,11 @@ const addingflat = async(req,res)=>{
     console.log(siteName)
    await findSiteFlat(req, res, flatNo, siteName);
 
-    // let arr = [];
     let obj = {};
     obj.flatNo = flatNo;
     obj.siteName = siteName;
     addFlat.flatUserDetails.push(obj)
-    // arr.push(obj);
-    //  addFlat = new userModel({
-    //  flatUserDetails:arr
-    // })
-await  addFlat.save()
+    await  addFlat.save()
 
 res.send({message:"successfull"})
 
