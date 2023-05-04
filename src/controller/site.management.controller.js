@@ -99,6 +99,11 @@ const sitePost = async (req, res) => {
   }
 };
 
+
+
+
+
+// function for giving the size of array using the below funciton with spwecific field
 function countFlat(noOfFloor, noOfFlatPerFloor, flats) {
   let temp = 100;
   for (let i = 1; i <= noOfFloor; i++) {

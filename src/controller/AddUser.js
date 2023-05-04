@@ -12,7 +12,7 @@ const userGet = async (req, res) => {
     const ans = await result;
     return res.status(201).send(ans);
   } catch (error) {
-    console.log(error);
+  
     return res.status(400).send({ message: "error" });
   }
 
@@ -28,7 +28,7 @@ const usersingleGet = async (req, res) => {
     const ans = await result;
     return res.status(201).send(ans);
   } catch (error) {
-    console.log(error);
+  
     return res.status(400).send({ message: "error" });
   }
 
@@ -38,11 +38,12 @@ const usersingleGet = async (req, res) => {
 // this function is called to add user
 const userPost = async (req, res) => {
   try {
-    console.log();
+   
     const flatNo = req.body.flatNo;
     const siteName = req.body.siteName;
     // this is called to make isBought field true in the user id
-    await findSiteFlat(req, res, flatNo, siteName);
+ const check=   await findSiteFlat(req, res, flatNo, siteName);
+ console.log(check,"this is from psot")
     let arr = [];
     let obj = new Object();
     obj.flatNo = flatNo;
@@ -98,10 +99,54 @@ const adminUserUpdate = async(req,res)=>{
   const updateUser = await userModel.findByIdAndUpdate(id,req.body,{new:true})
   res.status(201).send({message:"successful"})
   } catch (error) {
-    console.log(error)
+  
     res.status(401).send({message:"error"})
   }
 }
+
+
+// saving the value of the flat and site which are added after adding user separetely
+const addingflat = async(req,res)=>{
+  try{
+    const id = req.params.id;
+    console.log("====>sadfsf",req.body)
+    console.log("====>",id)
+    const flatNo = req.body.flatNo;
+    const siteName = req.body.siteName;
+
+
+
+    const addFlat = await userModel.findOne({_id:id})
+    
+    console.log(flatNo)
+    console.log(siteName)
+   await findSiteFlat(req, res, flatNo, siteName);
+
+    let obj = {};
+    obj.flatNo = flatNo;
+    obj.siteName = siteName;
+    addFlat.flatUserDetails.push(obj)
+    await  addFlat.save()
+
+res.send({message:"successfull"})
+
+
+  }catch(error){
+    console.log(error)
+
+res.send({message:"error"})
+  }
+} 
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -115,16 +160,15 @@ const userMail = async (req, res) => {
     const result = await userModel.findById({ _id: id });
     const sendPassword = await sendMail(result.email, userPassword);
     userPassword = await bcrypt.hash(userPassword.toString(), 10);
-    console.log(userPassword);
     const addPass = await result.updateOne({
       password: userPassword,
     });
     res.send(addPass);
   } catch (error) {
-    console.log(error);
     res.send(error);
   }
 };
+
 //function for sending the mail to the
 const sendMail = (userMailId, password) => {
   const transporter = nodemailer.createTransport({
@@ -181,11 +225,12 @@ async function findSiteFlat(req, res, flatNo, siteName) {
         data.isBought = true;
       }
     });
-    findIsBought.save();
-    console.log("---->", findIsBought);
+    console.log("from func",findIsBought)
+    await findIsBought.save();
+   
   } catch (error) {
-    console.log("=====>", error);
+   res.send({message:"error"})
   }
 }
 
-module.exports = { userGet, userPost, updateUser, usersingleGet, userMail ,adminUserUpdate};
+module.exports = { userGet, userPost, updateUser, usersingleGet, userMail ,adminUserUpdate,addingflat};
