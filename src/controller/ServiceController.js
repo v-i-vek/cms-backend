@@ -1,15 +1,14 @@
 const ServiceManage = require('../models/ServiceModel');
-const ser = require('../models/ServiceModel')
+
 ServiceManage
 
 exports.createSer = async (req,res) =>{
     try {
         const Ser =   ServiceManage(req.body);
         if (req.file) {
-            console.log("img")
             
             Ser.serviceimage = req.file.path;
-            console.log(Ser.serviceimage)
+          
         }
         await Ser.save().then(()=>{
             console.log("saved success");
@@ -26,7 +25,7 @@ exports.createSer = async (req,res) =>{
 exports.getSer = async (req, res) => {
     try {
         console.log(req.params);
-        const Ser = await ser.findById(req.params.id).populate('site_id').populate('user_id');
+        const Ser = await ServiceManage.findById(req.params.id).populate('site_id').populate('user_id');
        
         console.log(Ser)
         res.json(Ser);
@@ -38,14 +37,16 @@ exports.getSer = async (req, res) => {
 
 exports.updateSer = async (req, res) => {
 
-    const { name, description,customize, } = req.body;
+   id = req.params.id
     try {
-        console.log(req.params)
-        const Ser = await ser.findByIdAndUpdate({ _id: req.params.id }, req.body);
-        const updatedSer = await Ser.save();
-        console.log(Ser)
-        res.json(updatedSer)
+        const data = req.body
+        data.serviceimage=req.file.path
+        const update = await ServiceManage.findByIdAndUpdate(id,data,{new:true});
+        console.log("update",update)
+        res.status(201).send({message:"successfully"});
     } catch (err) {
+        console.log(err)
+
         res.status(400).json({ message: err.message });
     }
 
@@ -53,7 +54,7 @@ exports.updateSer = async (req, res) => {
 
 exports.deleteSer = async (req, res) => {
     try {
-        await ser.findByIdAndDelete(req.params.id);
+        await ServiceManage.findByIdAndDelete(req.params.id);
         res.json({ message: 'user deleted' });
     } catch (err) {
         res.status(404).json({ message: "user not found" });
@@ -61,7 +62,7 @@ exports.deleteSer = async (req, res) => {
 }
 exports.getAll = async(req,res)=>{
     try {
-        const result = await ser.find()
+        const result = await ServiceManage.find().populate('site_id')
     res.send(result)
     } catch (error) {
         res.send({message:"error "})
