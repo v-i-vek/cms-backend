@@ -40,7 +40,9 @@ const sitePatch = async (req, res) => {
     console.log(req.body)
     try {
       const data = req.body
+      if(req.file){
       data.brandLogo=req.file.path
+      }
       const update = await siteMangementModel.findByIdAndUpdate(id,data,{new:true});
       console.log("update",update)
       res.status(201).send({message:"successfully"});

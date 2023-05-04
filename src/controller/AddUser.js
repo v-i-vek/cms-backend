@@ -1,4 +1,6 @@
 const userModel = require("../models/registerUser");
+const hbs = require('nodemailer-express-handlebars')
+const path = require('path')
 // nodemailer
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
@@ -82,6 +84,28 @@ const updateUser = async (req, res) => {
   }
 };
 
+
+
+
+
+//for admin side user update
+
+
+const adminUserUpdate = async(req,res)=>{
+  try {
+    const id = req.params.id;
+
+  const updateUser = await userModel.findByIdAndUpdate(id,req.body,{new:true})
+  res.status(201).send({message:"successful"})
+  } catch (error) {
+    console.log(error)
+    res.status(401).send({message:"error"})
+  }
+}
+
+
+
+
 //this is for sending mail to the user
 const userMail = async (req, res) => {
   try {
@@ -103,7 +127,7 @@ const userMail = async (req, res) => {
 };
 //function for sending the mail to the
 const sendMail = (userMailId, password) => {
-  const transport = nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: "vivek.yadav@volansys.com",
@@ -118,7 +142,27 @@ const sendMail = (userMailId, password) => {
     subject: "cms login creditnals",
     text: "your password is \n" + password + "\n do not share with anyone",
   };
-  transport.sendMail(options, function (err, info) {
+
+
+// // point to the template folder
+// const handlebarOptions = {
+//   viewEngine: {
+//       partialsDir: path.resolve('./views/'),
+//       defaultLayout: false,
+//   },
+//   viewPath: path.resolve('../views/'),
+// };
+
+// use a template file with nodemailer
+// transporter.use('compile', hbs(handlebarOptions))
+
+
+
+
+
+
+
+  transporter.sendMail(options, function (err, info) {
     if (err) {
       console.log(err);
       return;
@@ -144,4 +188,4 @@ async function findSiteFlat(req, res, flatNo, siteName) {
   }
 }
 
-module.exports = { userGet, userPost, updateUser, usersingleGet, userMail };
+module.exports = { userGet, userPost, updateUser, usersingleGet, userMail ,adminUserUpdate};
