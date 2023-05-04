@@ -52,6 +52,7 @@ app.use(cors(corsOpts));
 app.use(roleRoute)
 app.use("/uploads", express.static("uploads"));
 app.use("/Site_img_uploads",express.static("Site_img_uploads"))
+app.use("/serviceImages",express.static("serviceImages"))
 app.use(route);
 app.use(siteRoute)
 app.use(addressRoute)
