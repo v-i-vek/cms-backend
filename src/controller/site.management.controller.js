@@ -31,23 +31,17 @@ const sitePatch = async (req, res) => {
     let flats = [];
     let numberOfFlats = countFlat(noOfFloor, noOfFlatPerFloor, flats);
 
-    let image;
-    if (req.file) {
-      image = await req.file.path;
-     
-      console.log(image)// this is for checking the valid name and giving the path
-    }
-    console.log(req.body)
+   
     try {
       const data = req.body
       if(req.file){
       data.brandLogo=req.file.path
       }
+      data.flatDetails = numberOfFlats
       const update = await siteMangementModel.findByIdAndUpdate(id,data,{new:true});
-      console.log("update",update)
       res.status(201).send({message:"successfully"});
     } catch (error) {
-      console.log(error);
+      res.status(404).send({message:"error"})
     }
   
     
@@ -77,7 +71,6 @@ const sitePost = async (req, res) => {
 
     let flats = [];
     let numberOfFlats = countFlat(noOfFloor, noOfFlatPerFloor, flats);
-    console.log(numberOfFlats);
 
     const siteManage = new siteMangementModel({
       siteName: req.body.siteName,
@@ -87,6 +80,8 @@ const sitePost = async (req, res) => {
       noOfFlatPerFloor: req.body.noOfFlatPerFloor,
       totalFlat: totalFlat,
       flatDetails: numberOfFlats,
+      description:req.body.description,
+      status:req.body.status
     });
 
     if (req.file) {
@@ -98,6 +93,18 @@ const sitePost = async (req, res) => {
     return res.status(401).send(error.message);
   }
 };
+// updateing the status of the upcoming and ongoing site
+const updateStatus = async(req,res)=>{
+  try {
+    const id  = req.params.id
+    console.log(req.body)
+    const data = req.body
+    const result = await siteMangementModel.findByIdAndUpdate(id,data,{})
+    res.status(201).send({message:"successful"})
+  } catch (error) {
+    res.status(401).send({message:"error"})
+  }
+}
 
 
 
@@ -120,4 +127,4 @@ function countFlat(noOfFloor, noOfFlatPerFloor, flats) {
   return flats;
 }
 
-module.exports = { sitePost, siteGet, sitePatch, siteDelete, siteAllGet };
+module.exports = { sitePost, siteGet, sitePatch, siteDelete, siteAllGet,updateStatus };

@@ -39,6 +39,12 @@ const siteManageSchema = mongoose.Schema({
       }
     }
   ],
+  description:{
+    type:String
+  },
+  status:{
+    type:String
+  },
   brandLogo:{
     type:String
   }
