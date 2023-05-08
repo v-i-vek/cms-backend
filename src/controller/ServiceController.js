@@ -69,3 +69,20 @@ exports.getAll = async(req,res)=>{
     }
     
 }
+exports.createService = async (req, res) => {
+    try {
+      const newService = new ServiceManage(req.body);
+      if (req.file) {
+        newService.serviceimage = req.file.path;
+      }
+      await newService.save();
+      res.status(201).send(newService);
+    } catch (e) {
+      console.log(e);
+      res.status(500).send(e);
+    }
+  };
+  
+
+
+
