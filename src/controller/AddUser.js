@@ -103,9 +103,6 @@ const adminUserUpdate = async(req,res)=>{
   }
 }
 
-
-
-
 //this is for sending mail to the user
 const userMail = async (req, res) => {
   try {

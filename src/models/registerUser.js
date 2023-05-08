@@ -84,7 +84,7 @@ const userSchema = mongoose.Schema({
   // },
 
   docFile: {
-    type: String,
+    type: String
   },
 
 
