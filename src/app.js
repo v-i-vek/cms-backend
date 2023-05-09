@@ -19,7 +19,7 @@ const ServiceRoute = require("./route/ServiceRoutes")
 // const userroute = require("./route/user");
 const roleRoute = require("./route/role");
 const siteRoute = require('./route/siteManegement.route');
-
+const documentRoute = require("./route/DocumentRoute")
 app.use(cookieParser());
 app.use(express.json());
 const DB_URL = "mongodb+srv://root:root@cluster0.63corsg.mongodb.net/test";
@@ -53,6 +53,7 @@ app.use(roleRoute)
 app.use("/uploads", express.static("uploads"));
 app.use("/Site_img_uploads",express.static("Site_img_uploads"))
 app.use("/serviceImages",express.static("serviceImages"))
+app.use("/documentUploads",express.static("documentUploads"))
 app.use(route);
 app.use(siteRoute)
 app.use(addressRoute)
@@ -65,6 +66,7 @@ app.use(LoginRoute);
 app.use(LogOutRoute);
 app.use(flatRoute);
 app.use(materialRoute);
+app.use(documentRoute)
 app.listen(port, () => {
   console.log(`connnecte ${port}`);
 });

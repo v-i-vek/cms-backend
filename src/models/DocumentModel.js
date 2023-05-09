@@ -1,31 +1,16 @@
 const mongoose = require("mongoose");
 const document_masterSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minlength: 2,
+  documentName: {
+    type: String
   },
-
-  user_id: {
-    type: Number,
-    requird: true,
+  user_id:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "adduser",
   },
-
-  type: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-
-  status: {
-    type: Boolean,
-    required: true,
-  },
-
-  image: {
-    type: String,
+  documentpdf: {
+    type:[Object],blackbox: true
   },
 });
 
-const document_master = new mongoose.model("document_master",document_masterSchema);
-module.exports = document_master;
+const documentMaster = new mongoose.model("documentMaster",document_masterSchema);
+module.exports = documentMaster;
