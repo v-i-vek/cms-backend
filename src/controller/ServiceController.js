@@ -62,27 +62,36 @@ exports.deleteSer = async (req, res) => {
 }
 exports.getAll = async(req,res)=>{
     try {
-        const result = await ServiceManage.find().populate('site_id')
+        const result = await ServiceManage.find({ site_id : {$ne : null} }).populate('site_id')
     res.send(result)
     } catch (error) {
         res.send({message:"error "})
     }
     
 }
-exports.createService = async (req, res) => {
+
+
+exports.getAllUserServices = async (req, res) => {
     try {
-      const newService = new ServiceManage(req.body);
-      if (req.file) {
-        newService.serviceimage = req.file.path;
-      }
-      await newService.save();
-      res.status(201).send(newService);
-    } catch (e) {
-      console.log(e);
-      res.status(500).send(e);
+        const services = await ServiceManage.find({ user_id : {$ne : null} }).populate('user_id','name');
+        res.send(services)
+    } catch (error) {
+        console.error('Error retrieving user services:', error);
+        res.status(500).json({ error: 'Failed to retrieve user services' });
     }
-  };
-  
+};
+
+exports.updateServices = async (req, res) => {
+    console.log(req.body.selectedServices);
+    const selectedServices = req.body.selectedServices;
+    const data = await ServiceManage.create({
+        name: selectedServices[0].name,
+        description: selectedServices[0].description,
+        user_id: req.body.userId
+    });
+    data.save();
+}
+
 
 
 
