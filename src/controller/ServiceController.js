@@ -40,7 +40,11 @@ exports.updateSer = async (req, res) => {
    id = req.params.id
     try {
         const data = req.body
-        data.serviceimage=req.file.path
+        console.log(data)
+        if(req.file){
+            data.serviceimage=req.file.path
+        }
+       
         const update = await ServiceManage.findByIdAndUpdate(id,data,{new:true});
         console.log("update",update)
         res.status(201).send({message:"successfully"});
