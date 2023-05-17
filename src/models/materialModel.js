@@ -29,9 +29,12 @@ const MaterialSchema = new mongoose.Schema({
     type: Number,
   },
   Material_status: {
-    type: Boolean,
+    type: String,
+    enum: ["tick", "cancel", "in progress"],
+    default: "tick",
   },
-  Material_img: {
+  
+ image: {
     type: String,
   },
 });
