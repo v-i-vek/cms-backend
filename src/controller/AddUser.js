@@ -1,6 +1,6 @@
 const userModel = require("../models/registerUser");
-const hbs = require('nodemailer-express-handlebars')
-const path = require('path')
+
+
 // nodemailer
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
