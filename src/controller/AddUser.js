@@ -174,8 +174,8 @@ const sendMail = (userMailId, password) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "vivek.yadav@volansys.com",
-      pass: "vivek9499&rajnish",
+      user: "",
+      pass: "",
     },
   });
 
